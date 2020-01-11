@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B48A5A8C23CA5D1600453B85 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A5A8B23CA5D1600453B85 /* Notifications.swift */; };
 		BE7FF5D123C9BEC8003ADA12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7FF5D023C9BEC8003ADA12 /* AppDelegate.swift */; };
 		BE7FF5D323C9BEC8003ADA12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7FF5D223C9BEC8003ADA12 /* SceneDelegate.swift */; };
 		BE7FF5D523C9BEC8003ADA12 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7FF5D423C9BEC8003ADA12 /* FirstViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B48A5A8B23CA5D1600453B85 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		BE7FF5CD23C9BEC8003ADA12 /* iFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7FF5D023C9BEC8003ADA12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE7FF5D223C9BEC8003ADA12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				BE7FF5D423C9BEC8003ADA12 /* FirstViewController.swift */,
 				BE7FF5D623C9BEC8003ADA12 /* SecondViewController.swift */,
 				BE7FF5D823C9BEC8003ADA12 /* Main.storyboard */,
+				B48A5A8B23CA5D1600453B85 /* Notifications.swift */,
 				BE7FF5DB23C9BECA003ADA12 /* Assets.xcassets */,
 				BE7FF5DD23C9BECA003ADA12 /* LaunchScreen.storyboard */,
 				BE7FF5E023C9BECA003ADA12 /* Info.plist */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B48A5A8C23CA5D1600453B85 /* Notifications.swift in Sources */,
 				BE7FF5D723C9BEC8003ADA12 /* SecondViewController.swift in Sources */,
 				BE7FF5D523C9BEC8003ADA12 /* FirstViewController.swift in Sources */,
 				BE7FF5D123C9BEC8003ADA12 /* AppDelegate.swift in Sources */,
