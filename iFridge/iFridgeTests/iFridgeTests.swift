@@ -22,6 +22,15 @@ class iFridgeTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let manager =
+            LocalNotificationManager()
+        manager.notifications = [
+            Notification(id: "reminder-1", title: "Remember the milk!", datetime: DateComponents(calendar: Calendar.current, year: 2020, month: 1, day: 11, hour: 13, minute: 45)),
+            Notification(id: "reminder-2", title: "Ask Bob from accounting", datetime: DateComponents(calendar: Calendar.current, year: 2020, month: 1, day: 11, hour: 13, minute: 46)),
+            Notification(id: "reminder-3", title: "Send postcard to mom", datetime: DateComponents(calendar: Calendar.current, year: 2020, month: 1, day: 11, hour: 13, minute: 47)),
+        ]
+
+        manager.schedule()
     }
 
     func testPerformanceExample() {
