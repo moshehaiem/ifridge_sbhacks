@@ -11,6 +11,7 @@ import UIKit
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     var groceryList = [String]()
+    let manager = LocalNotificationManager()
     @IBOutlet weak var listInput: UITextField!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var expDate: UITextField!
@@ -60,7 +61,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             listInput.text = ""
             myTableView.reloadData()
         }
-
+        
     }
     
     func createDatePicker(){

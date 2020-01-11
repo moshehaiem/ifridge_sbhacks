@@ -1,5 +1,5 @@
 //
-//  Notifications.swift
+//  Notification.swift
 //  iFridge
 //
 //  Created by Zion Wang on 1/11/20.
@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+
 import UserNotifications
 
 class LocalNotificationManager
@@ -83,6 +84,3 @@ struct Notification {
     var title:String
     var datetime:DateComponents
 }
-
-
-
