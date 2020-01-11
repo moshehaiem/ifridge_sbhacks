@@ -10,19 +10,23 @@ import UIKit
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var list = ["eggs", "chicken", "milk"]
+    @IBOutlet weak var dateField: UITextField!
+    
+    let picker = UIDatePicker()
+    
+    var groceryList = ["eggs", "chicken", "milk"]
     
     @IBOutlet weak var myTableView: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return (list.count)
+        return (groceryList.count)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = list[indexPath.row]
+        cell.textLabel?.text = groceryList[indexPath.row]
         
         return(cell)
     }
@@ -31,21 +35,19 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         if editingStyle == UITableViewCell.EditingStyle.delete
         {
-            self.list.remove(at: indexPath.row)
+            self.groceryList.remove(at: indexPath.row)
             myTableView.reloadData()
         }
         
     }
     
-    
     @IBOutlet weak var input: UITextField!
-    
     
     @IBAction func addItem(_ sender: Any)
     {
         if (input.text != "")
         {
-            self.list.append(input.text!)
+            self.groceryList.append(input.text!)
             input.text = ""
             myTableView.reloadData()
         }
@@ -56,8 +58,38 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        createDatePicker()
     }
-
-
+    
+    func createDatePicker() {
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //done button for tookbar
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target:nil, action: #selector(donePressed))
+        toolbar.setItems([done], animated: false)
+        
+        dateField.inputAccessoryView = toolbar
+        dateField.inputView = picker
+        
+        //format picker for date
+        picker.datePickerMode = .date
+    }
+    
+    @objc func donePressed() {
+        // format date
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        let dateString = formatter.string(from: picker.date)
+        
+        dateField.text = "\(dateString)"
+        self.view.endEditing(true)
+    }
+    
 }
+
+
 
