@@ -8,16 +8,25 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet weak var dateField: UITextField!
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {Í
+   
+    var groceryList = ["eggs", "chicken", "milk"]
+    @IBOutlet weak var listInput: UITextField!
+    @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var expDate: UITextField!
     
     let picker = UIDatePicker()
     
-    var groceryList = ["eggs", "chicken", "milk"]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createDatePicker()
+        
+        listInput.delegate = self
+        // Do any additional setup after loading the view.
+    }
     
-    @IBOutlet weak var myTableView: UITableView!
     
+    //table interface
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return (groceryList.count)
@@ -27,7 +36,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
         cell.textLabel?.text = groceryList[indexPath.row]
-        
+
         return(cell)
     }
     
@@ -38,55 +47,55 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.groceryList.remove(at: indexPath.row)
             myTableView.reloadData()
         }
-        
+
     }
     
-    @IBOutlet weak var input: UITextField!
-    
+    //plus button interface
     @IBAction func addItem(_ sender: Any)
     {
-        if (input.text != "")
+        if (listInput.text != "")
         {
-            self.groceryList.append(input.text!)
-            input.text = ""
+            self.groceryList.append(listInput.text!)
+            listInput.text = ""
             myTableView.reloadData()
         }
-        
+
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        createDatePicker()
-    }
-    
-    func createDatePicker() {
+    func createDatePicker(){
         //toolbar
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
         //done button for toolbar
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target:nil, action: #selector(donePressed))
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
         toolbar.setItems([done], animated: false)
         
-        dateField.inputAccessoryView = toolbar
-        dateField.inputView = picker
+        expDate.inputAccessoryView = toolbar
+        expDate.inputView = picker
         
         //format picker for date
         picker.datePickerMode = .date
     }
     
-    @objc func donePressed() {
-        // format date
+    @objc func donePressed(){
+        //formate date
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         let dateString = formatter.string(from: picker.date)
         
-        dateField.text = "\(dateString)"
+        expDate.text = "\(dateString)"
         self.view.endEditing(true)
     }
-    //asdfasdf
+
+}
+
+
+//when return key is pressed it will dismiss the keyboard
+extension FirstViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
