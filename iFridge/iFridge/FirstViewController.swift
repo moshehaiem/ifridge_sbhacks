@@ -52,7 +52,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if editingStyle == UITableViewCell.EditingStyle.delete
         {
             let temp = groceryList[indexPath.row]
-            manager.deleteNotification(temp: temp)
+            manager.deleteNotification(temp: temp.foodName)
             self.groceryList.remove(at: indexPath.row)
             myTableView.reloadData()
             manager.listScheduledNotifications()
@@ -63,17 +63,22 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //plus button interface
     @IBAction func addItem(_ sender: Any)
     {
-//        print(picker.date)
         if (listInput.text != "")
         {
-//            let currentDateTime = Date()
             let varName = FoodItem(foodName: listInput.text!, expDate: picker.date )
+            //let expirDate = picker.date
+            //let tempDate = Calendar.current.dateComponents([.year, .month, .day], from: expirDate)
+            let tempDate = DateComponents(calendar: Calendar.current, year: 2020, month: 1, day: 11, hour: 21, minute: 26)Í
+            manager.addNotification(food: listInput.text!, date: tempDate)
+            manager.schedule()
+            manager.listScheduledNotifications()
             self.groceryList.append(varName)
             self.groceryList.sort{ (item1, item2) -> Bool in
                 return item1.expDate.compare(item2.expDate) == ComparisonResult.orderedAscending
                 
             }
             listInput.text = ""
+            expDate.text = ""
             myTableView.reloadData()
         }
         //manager.addNotification(listInput.text, )
