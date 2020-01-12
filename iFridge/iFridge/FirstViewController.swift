@@ -11,7 +11,7 @@ import UIKit
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     var groceryList = [FoodItem]()
-    let manager = LocalNotificationManager()
+//    let manager = LocalNotificationManager()
     @IBOutlet weak var listInput: UITextField!
     @IBOutlet weak var myTableView: UITableView!
     
@@ -22,6 +22,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         createDatePicker()
+        let currentDate = Date()
+//        print(currentDate)
+
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
+        cell.textLabel?.textColor = UIColor.red
         
         listInput.delegate = self
         // Do any additional setup after loading the view.
@@ -41,8 +46,23 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         let date = formatter.string(from: groceryList[indexPath.row].expDate)
-        
+//        let diffInDays = Calendar.current.dateComponents([.day], from: Date, to: groceryList[indexPath.row].expDate)
+//        prinit(diffInDays)
         cell.textLabel?.text = groceryList[indexPath.row].foodName + "  " + date
+        let today = Date()
+        let modifiedDate = Calendar.current.date(byAdding: .day, value: 7, to: today)!
+        if (groceryList[indexPath.row].expDate < modifiedDate ){
+            cell.textLabel?.textColor = UIColor.orange
+        }
+        let modifiedDate2 = Calendar.current.date(byAdding: .day, value: 14, to: today)!
+        if (groceryList[indexPath.row].expDate >= modifiedDate2 ){
+            cell.textLabel?.textColor = UIColor.green
+        }
+        if (groceryList[indexPath.row].expDate < today ){
+            cell.textLabel?.textColor = UIColor.red
+        }
+        
+ 
 
         return(cell)
     }
@@ -51,11 +71,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         if editingStyle == UITableViewCell.EditingStyle.delete
         {
-            let temp = groceryList[indexPath.row]
-            manager.deleteNotification(temp: temp.foodName)
+//            let temp = groceryList[indexPath.row]
+//            manager.deleteNotification(temp: temp.foodName)
             self.groceryList.remove(at: indexPath.row)
             myTableView.reloadData()
-            manager.listScheduledNotifications()
+//            manager.listScheduledNotifications()
         }
 
     }
@@ -68,14 +88,13 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let varName = FoodItem(foodName: listInput.text!, expDate: picker.date )
             //let expirDate = picker.date
             //let tempDate = Calendar.current.dateComponents([.year, .month, .day], from: expirDate)
-            let tempDate = DateComponents(calendar: Calendar.current, year: 2020, month: 1, day: 11, hour: 21, minute: 26)Í
-            manager.addNotification(food: listInput.text!, date: tempDate)
-            manager.schedule()
-            manager.listScheduledNotifications()
+//            let tempDate = DateComponents(calendar: Calendar.current, year: 2020, month: 1, day: 11, hour: 21, minute: 26)Í
+//            manager.addNotification(food: listInput.text!, date: tempDate)
+//            manager.schedule()
+//            manager.listScheduledNotifications()
             self.groceryList.append(varName)
             self.groceryList.sort{ (item1, item2) -> Bool in
                 return item1.expDate.compare(item2.expDate) == ComparisonResult.orderedAscending
-                
             }
             listInput.text = ""
             expDate.text = ""
