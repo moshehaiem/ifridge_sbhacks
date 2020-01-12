@@ -9,8 +9,12 @@
 import UIKit
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var searching = false
     var groceryList = [FoodItem]()
+    var searchGroceryList  = [FoodItem]()
 //    let manager = LocalNotificationManager()
     @IBOutlet weak var listInput: UITextField!
     @IBOutlet weak var myTableView: UITableView!
@@ -22,11 +26,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         createDatePicker()
-        let currentDate = Date()
-//        print(currentDate)
+//        let currentDate = Date()
 
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.textColor = UIColor.red
         
         listInput.delegate = self
         // Do any additional setup after loading the view.
@@ -35,32 +36,41 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //table interface
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return (groceryList.count)
+        if searching {
+            return (searchGroceryList.count)
+        }
+        else{
+            return (groceryList.count)
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-    
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        let date = formatter.string(from: groceryList[indexPath.row].expDate)
-//        let diffInDays = Calendar.current.dateComponents([.day], from: Date, to: groceryList[indexPath.row].expDate)
-//        prinit(diffInDays)
-        cell.textLabel?.text = groceryList[indexPath.row].foodName + "  " + date
-        let today = Date()
-        let modifiedDate = Calendar.current.date(byAdding: .day, value: 7, to: today)!
-        if (groceryList[indexPath.row].expDate < modifiedDate ){
-            cell.textLabel?.textColor = UIColor.orange
+        if searching {
+            cell.textLabel?.text = searchGroceryList[indexPath.row].foodName
+        }else{
+            let formatter = DateFormatter()
+                    formatter.dateStyle = .medium
+                    formatter.timeStyle = .none
+                    let date = formatter.string(from: groceryList[indexPath.row].expDate)
+            //        let diffInDays = Calendar.current.dateComponents([.day], from: Date, to: groceryList[indexPath.row].expDate)
+            //        prinit(diffInDays)
+                    cell.textLabel?.text = groceryList[indexPath.row].foodName + "  " + date
+                    let today = Date()
+                    let modifiedDate = Calendar.current.date(byAdding: .day, value: 7, to: today)!
+                    if (groceryList[indexPath.row].expDate <= modifiedDate ){
+                        cell.textLabel?.textColor = UIColor.orange
+                    }
+                    let modifiedDate2 = Calendar.current.date(byAdding: .day, value: 7, to: today)!
+                    if (groceryList[indexPath.row].expDate >= modifiedDate2 ){
+                        cell.textLabel?.textColor = UIColor.green
+                    }
+                    if (groceryList[indexPath.row].expDate <= today ){
+                        cell.textLabel?.textColor = UIColor.red
+                    }
         }
-        let modifiedDate2 = Calendar.current.date(byAdding: .day, value: 14, to: today)!
-        if (groceryList[indexPath.row].expDate >= modifiedDate2 ){
-            cell.textLabel?.textColor = UIColor.green
-        }
-        if (groceryList[indexPath.row].expDate < today ){
-            cell.textLabel?.textColor = UIColor.red
-        }
+        
         
  
 
@@ -139,5 +149,18 @@ extension FirstViewController : UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension FirstViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchGroceryList = groceryList.filter({$0.foodName.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        searching = true
+        myTableView.reloadData()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
+        searching = false
+        searchBar.text = ""
+        myTableView.reloadData()
     }
 }
