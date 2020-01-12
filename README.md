@@ -4,6 +4,8 @@ iFridge is an iOS app made for hackathon SBHacks 2020 for manually logging and t
 ## Installation
 find it on the Apple App Store one day
 
+or install XCode and run a simulation to run a demo of the application
+
 ## Usage
 Start with typing in your desired item at the bottom and choosing an estimated expiration date, and it will be added to a list.
 	
