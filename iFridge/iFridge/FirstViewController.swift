@@ -10,7 +10,7 @@ import UIKit
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
-    var groceryList = [String]()
+    var groceryList = [FoodItem]()
     let manager = LocalNotificationManager()
     @IBOutlet weak var listInput: UITextField!
     @IBOutlet weak var myTableView: UITableView!
@@ -36,7 +36,13 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = groceryList[indexPath.row]
+    
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        let date = formatter.string(from: groceryList[indexPath.row].expDate)
+        
+        cell.textLabel?.text = groceryList[indexPath.row].foodName + "  " + date
 
         return(cell)
     }
@@ -54,14 +60,20 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //plus button interface
     @IBAction func addItem(_ sender: Any)
     {
-        print(picker.date)
+//        print(picker.date)
         if (listInput.text != "")
         {
-            self.groceryList.append(listInput.text!)
+//            let currentDateTime = Date()
+            let varName = FoodItem(foodName: listInput.text!, expDate: picker.date )
+            self.groceryList.append(varName)
+            self.groceryList.sort{ (item1, item2) -> Bool in
+                return item1.expDate.compare(item2.expDate) == ComparisonResult.orderedAscending
+                
+            }
             listInput.text = ""
             myTableView.reloadData()
         }
-        
+        //manager.addNotification(listInput.text, )
     }
     
     func createDatePicker(){

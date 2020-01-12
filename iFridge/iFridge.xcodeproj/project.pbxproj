@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D8C6DCA23CA852100D7BBEA /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6DC923CA852100D7BBEA /* Notification.swift */; };
+		8D8C6DCC23CA8B6800D7BBEA /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6DCB23CA8B6800D7BBEA /* util.swift */; };
 		BE7FF5D123C9BEC8003ADA12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7FF5D023C9BEC8003ADA12 /* AppDelegate.swift */; };
 		BE7FF5D323C9BEC8003ADA12 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7FF5D223C9BEC8003ADA12 /* SceneDelegate.swift */; };
 		BE7FF5D523C9BEC8003ADA12 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7FF5D423C9BEC8003ADA12 /* FirstViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		8D8C6DC923CA852100D7BBEA /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		8D8C6DCB23CA8B6800D7BBEA /* util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
 		BE7FF5CD23C9BEC8003ADA12 /* iFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7FF5D023C9BEC8003ADA12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE7FF5D223C9BEC8003ADA12 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				BE7FF5DB23C9BECA003ADA12 /* Assets.xcassets */,
 				BE7FF5DD23C9BECA003ADA12 /* LaunchScreen.storyboard */,
 				BE7FF5E023C9BECA003ADA12 /* Info.plist */,
+				8D8C6DCB23CA8B6800D7BBEA /* util.swift */,
 			);
 			path = iFridge;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				BE7FF5D723C9BEC8003ADA12 /* SecondViewController.swift in Sources */,
 				8D8C6DCA23CA852100D7BBEA /* Notification.swift in Sources */,
 				BE7FF5D523C9BEC8003ADA12 /* FirstViewController.swift in Sources */,
+				8D8C6DCC23CA8B6800D7BBEA /* util.swift in Sources */,
 				BE7FF5D123C9BEC8003ADA12 /* AppDelegate.swift in Sources */,
 				BE7FF5D323C9BEC8003ADA12 /* SceneDelegate.swift in Sources */,
 			);
