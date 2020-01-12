@@ -13,7 +13,7 @@ import UserNotifications
 class LocalNotificationManager
 {
     var notifications = [Notification]()
-    
+    // adding a notification to the array of notifications
     func addNotification(food: String, date: DateComponents){
         let temp = Notification(id: food, title: food, datetime: date)
         notifications.append(temp)
@@ -76,7 +76,18 @@ class LocalNotificationManager
         }
     }
     
-    
+    func deleteNotification(temp: String){
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [temp])
+        var index = 0
+        var currentIndex = 0
+        for kevin in notifications{
+            if kevin.id == temp {
+                index = currentIndex
+            }
+            currentIndex += 1
+        }
+        notifications.remove(at: index)
+    }
 }
 
 struct Notification {

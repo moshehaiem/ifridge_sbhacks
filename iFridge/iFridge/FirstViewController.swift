@@ -26,7 +26,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Do any additional setup after loading the view.
     }
     
-    
     //table interface
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -45,8 +44,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         if editingStyle == UITableViewCell.EditingStyle.delete
         {
+            let temp = groceryList[indexPath.row]
+            manager.deleteNotification(temp: temp)
             self.groceryList.remove(at: indexPath.row)
             myTableView.reloadData()
+            manager.listScheduledNotifications()
         }
 
     }
@@ -54,14 +56,19 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //plus button interface
     @IBAction func addItem(_ sender: Any)
     {
-        print(picker.date)
+        print(type(of: picker.date))
         if (listInput.text != "")
         {
             self.groceryList.append(listInput.text!)
             listInput.text = ""
             myTableView.reloadData()
         }
-        
+        let today = picker.date
+        print(today)
+        let tempDate = Calendar.current.dateComponents([.year, .month, .day], from: today)
+        manager.addNotification(food: listInput.text!, date: tempDate)
+        manager.schedule()
+        manager.listScheduledNotifications()
     }
     
     func createDatePicker(){
