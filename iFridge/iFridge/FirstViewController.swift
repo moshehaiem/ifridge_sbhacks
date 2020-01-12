@@ -27,7 +27,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Do any additional setup after loading the view.
     }
     
-    
     //table interface
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -52,8 +51,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         if editingStyle == UITableViewCell.EditingStyle.delete
         {
+            let temp = groceryList[indexPath.row]
+            manager.deleteNotification(temp: temp)
             self.groceryList.remove(at: indexPath.row)
             myTableView.reloadData()
+            manager.listScheduledNotifications()
         }
 
     }
