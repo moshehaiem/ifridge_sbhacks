@@ -14,6 +14,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let manager = LocalNotificationManager()
     @IBOutlet weak var listInput: UITextField!
     @IBOutlet weak var myTableView: UITableView!
+    
     @IBOutlet weak var expDate: UITextField!
     
     let picker = UIDatePicker()
@@ -80,7 +81,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //toolbar
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        
         //done button for toolbar
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
         toolbar.setItems([done], animated: false)
@@ -89,7 +89,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         expDate.inputView = picker
         
         //format picker for date
+       self.picker.minimumDate = Date()
         picker.datePickerMode = .date
+        
     }
     
     @objc func donePressed(){
