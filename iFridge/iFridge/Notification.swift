@@ -17,16 +17,18 @@ class LocalNotificationManager
     func addNotification(food: String, date: DateComponents){
         let temp = Notification(id: food, title: food, datetime: date)
         notifications.append(temp)
+        print(notifications)
     }
     
     func listScheduledNotifications()
     {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests(completionHandler: { notifications in
  
             for notification in notifications {
                 print(notification)
             }
-        }
+        })
     }
 
     private func requestAuthorization()
@@ -58,10 +60,10 @@ class LocalNotificationManager
     {
         for notification in notifications
         {
-            let content      = UNMutableNotificationContent()
-            content.title    = notification.title
+            let content = UNMutableNotificationContent()
+            content.title = notification.title
             content.body = "Expiring in 3 days!!!"
-            content.sound    = .default
+            content.sound = .default
 
             let trigger = UNCalendarNotificationTrigger(dateMatching: notification.datetime, repeats: false)
 

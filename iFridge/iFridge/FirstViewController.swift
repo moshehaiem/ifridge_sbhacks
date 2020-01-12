@@ -60,15 +60,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if (listInput.text != "")
         {
             self.groceryList.append(listInput.text!)
+            let today = picker.date
+            print(today)
+            let tempDate = Calendar.current.dateComponents([.year, .month, .day], from: today)
+            manager.addNotification(food: listInput.text!, date: tempDate)
+            manager.schedule()
+            manager.listScheduledNotifications()
+
             listInput.text = ""
             myTableView.reloadData()
         }
-        let today = picker.date
-        print(today)
-        let tempDate = Calendar.current.dateComponents([.year, .month, .day], from: today)
-        manager.addNotification(food: listInput.text!, date: tempDate)
-        manager.schedule()
-        manager.listScheduledNotifications()
     }
     
     func createDatePicker(){
