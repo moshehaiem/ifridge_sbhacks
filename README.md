@@ -6,6 +6,7 @@ find it on the Apple App Store one day
 
 ## Usage
 Start with typing in your desired item at the bottom and choosing an estimated expiration date, and it will be added to a list.
+	
 	- If the expiration date is beyond 2 weeks (14 days), the entry will be green
 	
 	- Once the expiration date is within 2 weeks, the entry will turn orange
