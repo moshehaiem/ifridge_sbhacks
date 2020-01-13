@@ -18,7 +18,7 @@ Start with typing in your desired item at the bottom and choosing an estimated e
 	- Once the expiration date is reached, another notification is sent out to notify the user that the item has expired
 
 ## Contributing
-please do
+Any Contributions or Additions would be helpful
 
 ## License
 none
